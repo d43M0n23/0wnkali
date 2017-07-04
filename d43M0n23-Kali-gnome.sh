@@ -194,7 +194,7 @@ mv daemon3.png kali-config/common/includes.chroot/usr/share/wallpapers/kali/cont
 
 # unedetnt install
 mkdir -p kali-config/common/debian-installer
-wget https://github.com/d43M0n23/0wnkali/kali-linux-full-unattended.preseed -O kali-config/common/debian-installer/preseed.cfg
+wget https://github.com/d43M0n23/0wnkali/blob/master/kali-linux-full-unattended.preseed -O kali-config/common/debian-installer/preseed.cfg
 
 
 #Let’s include a Nessus Debian package into the packages directory for inclusion into our final build. 
