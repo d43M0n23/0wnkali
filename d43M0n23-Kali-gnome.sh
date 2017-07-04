@@ -8,7 +8,7 @@
 # Special notes	: root user installation enabled through preseed.cfg. 
 #		: This script is not meant to run unattended.
 # Look and Feel	: Custom wallpaper and terminal configs through post install hooks.
-# Background	: http://www.offensive-security.com/kali-linux/kali-linux-recipes/
+# Background	: https://3xpl0it.com/c0r3/daemon3.png
 #########################################################################################
 
 # Update and install dependencies
@@ -36,7 +36,11 @@ cd live-build-config
 # The user doesn't need the kali-linux-full metapackage, we overwrite with our own basic packages.
 # This includes the debian-installer and the kali-linux-top10 metapackage (commented out for brevity of build, uncomment if needed).
 
-cat > config/package-lists/kali.list.chroot << EOF
+cat > kali-config/variant-default/package-lists/kali.list.chroot << EOF
+kali-linux
+kali-desktop-live
+kali-linux-full
+# Base
 kali-root-login
 kali-defaults
 kali-menu
@@ -45,14 +49,17 @@ kali-archive-keyring
 debian-installer-launcher
 alsa-tools
 locales-all
-xorg
+dconf-tools
+openssh-server
 bettercap
 screenfetch
 figlet
 terminator
 xrdp
-#kali-linux-top10
+# Graphical desktop
+kali-desktop-gnome
 EOF
+
 
 # Add boot-entry.
 cat << EOF > kali-config/common/includes.binary/isolinux/install.cfg
@@ -188,7 +195,6 @@ chmod +x kali-config/common/hooks/01-start-ssh.chroot
 # We download a wallpaper and overlay it.
 
 mkdir -p kali-config/common/includes.chroot/usr/share/wallpapers/kali/contents/images
-#wget https://www.kali.org/dojo/bh2015/wp-blue.png
 wget https://3xpl0it.com/c0r3/daemon3.png
 mv daemon3.png kali-config/common/includes.chroot/usr/share/wallpapers/kali/contents/images
 
