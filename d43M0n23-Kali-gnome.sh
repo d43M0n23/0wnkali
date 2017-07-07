@@ -41,15 +41,6 @@ kali-linux
 kali-desktop-live
 kali-linux-full
 # Base
-kali-root-login
-kali-defaults
-kali-menu
-kali-debtags
-kali-archive-keyring
-debian-installer-launcher
-alsa-tools
-locales-all
-dconf-tools
 openssh-server
 bettercap
 screenfetch
@@ -62,9 +53,11 @@ EOF
 
 
 # Add boot-entry.
+# url=http://[your-server]/preseed.cfg local=en_US hostname=kali domain=locale.lan
+
 cat << EOF > kali-config/common/includes.binary/isolinux/install.cfg
 label install
-    menu label ^Install Automated
+    menu label ^Install d43M0n23
     linux /install/vmlinuz
     initrd /install/initrd.gz
     append vga=788 -- quiet file=/cdrom/install/preseed.cfg locale=de_AT keymap=de hostname=d43M0n23 domain=local.lan
@@ -199,9 +192,12 @@ wget https://3xpl0it.com/c0r3/daemon3.png
 mv daemon3.png kali-config/common/includes.chroot/usr/share/wallpapers/kali/contents/images
 
 # unedetnt install
+# url=http://[your-server]/preseed.cfg local=en_US hostname=kali domain=locale.lan
 mkdir -p kali-config/common/debian-installer
-wget https://github.com/d43M0n23/0wnkali/blob/master/kali-linux-full-unattended.preseed -O kali-config/common/debian-installer/preseed.cfg
-
+#wget 
+cp /root/c0r3/02-workspace/xgit/0wnkali/kali-linux-full-unattended.preseed kali-config/common/debian-installer/preseed.cfg
+cp /root/c0r3/02-workspace/xgit/0wnkali/kali-linux-full-unattended.preseed kali-config/common/includes.installer/preseed.cfg
+#cp kali-config/common/debian-installer/preseed.cfg /cdrom/install/preseed.cfg
 
 #Let’s include a Nessus Debian package into the packages directory for inclusion into our final build. 
 #Since we used a 64 bit build, we’re including a 64 bit Nessus Debian package. 
