@@ -36,20 +36,20 @@ cd live-build-config
 # The user doesn't need the kali-linux-full metapackage, we overwrite with our own basic packages.
 # This includes the debian-installer and the kali-linux-top10 metapackage (commented out for brevity of build, uncomment if needed).
 
-cat > kali-config/variant-default/package-lists/kali.list.chroot << EOF
-kali-linux
-kali-desktop-live
-kali-linux-full
+#cat > kali-config/variant-default/package-lists/kali.list.chroot << EOF
+#kali-linux
+#kali-desktop-live
+#kali-linux-full
 # Base
-openssh-server
-bettercap
-screenfetch
-figlet
-terminator
-xrdp
+#openssh-server
+#bettercap
+#screenfetch
+#figlet
+#terminator
+#xrdp
 # Graphical desktop
-kali-desktop-gnome
-EOF
+#kali-desktop-gnome
+#EOF
 
 
 # Add boot-entry.
@@ -62,6 +62,7 @@ label install
     initrd /install/initrd.gz
     append vga=788 -- quiet file=/cdrom/install/preseed.cfg locale=de_AT keymap=de hostname=d43M0n23 domain=local.lan
 EOF
+
 
 
 # Add .bash_rc
@@ -191,6 +192,10 @@ mkdir -p kali-config/common/includes.chroot/usr/share/wallpapers/kali/contents/i
 wget https://3xpl0it.com/c0r3/daemon3.png
 mv daemon3.png kali-config/common/includes.chroot/usr/share/wallpapers/kali/contents/images
 
+# We download corescript
+git clone https://github.com/d43M0n23/corescript.git
+mv corescript kali-config/common/includes.chroot/root/corescript
+
 # unedetnt install
 # url=http://[your-server]/preseed.cfg local=en_US hostname=kali domain=locale.lan
 mkdir -p kali-config/common/debian-installer
@@ -198,6 +203,7 @@ mkdir -p kali-config/common/debian-installer
 cp /root/c0r3/02-workspace/xgit/0wnkali/kali-linux-full-unattended.preseed kali-config/common/debian-installer/preseed.cfg
 cp /root/c0r3/02-workspace/xgit/0wnkali/kali-linux-full-unattended.preseed kali-config/common/includes.installer/preseed.cfg
 #cp kali-config/common/debian-installer/preseed.cfg /cdrom/install/preseed.cfg
+
 
 #Let’s include a Nessus Debian package into the packages directory for inclusion into our final build. 
 #Since we used a 64 bit build, we’re including a 64 bit Nessus Debian package. 
